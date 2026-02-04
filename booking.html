@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book an Appointment | Ataraxy Wellness Spa</title>
+    <style>
+        :root {
+            --primary: #5e6d62; 
+            --accent: #b8977e;  
+            --light: #f9f7f2;   
+            --dark: #2c3332;    
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Optima', 'Segoe UI', Tahoma, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            min-height: 100vh;
+        }
+
+        /* UNIFIED NAVIGATION */
+        nav {
+            background: var(--dark);
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed; 
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            height: 80px; 
+        }
+
+        .logo { 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            color: white; 
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+            align-items: center;
+        }
+
+        /* DESKTOP CLICKABLE ROWS */
+        .nav-links a { 
+            display: block;
+            padding: 28px 20px; 
+            text-decoration: none; 
+            color: white; 
+            font-size: 0.8rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); background: rgba(255,255,255,0.03); }
+
+        /* HAMBURGER WITH 2PX GAP */
+        .hamburger { 
+            display: none; 
+            cursor: pointer; 
+            flex-direction: column; 
+            gap: 2px; 
+            padding: 10px;
+        }
+
+        .hamburger span { 
+            width: 25px; 
+            height: 2px; 
+            background: white; 
+            transition: 0.3s; 
+        }
+
+        @media (max-width: 950px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                display: none; 
+                flex-direction: column;
+                position: absolute;
+                top: 80px; 
+                left: 0;
+                width: 100%;
+                background: var(--dark);
+                padding: 0; 
+                text-align: center;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+            }
+
+            .nav-links.active { display: flex; }
+
+            /* MOBILE FULL-ROW CLICKABLE */
+            .nav-links li { width: 100%; }
+            .nav-links a { 
+                padding: 25px 0; 
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+            }
+            .nav-links li:last-child a { border-bottom: none; }
+        }
+
+        /* HORIZONTAL BOOKING SECTION */
+        .booking-section {
+            padding: 160px 20px 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .booking-container {
+            width: 100%;
+            max-width: 1200px;
+            background: white;
+            padding: 40px;
+            border-radius: 2px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+
+        h1 { text-align: center; color: var(--primary); text-transform: uppercase; letter-spacing: 6px; font-weight: 300; margin-bottom: 40px; }
+
+        form { 
+            display: flex;
+            flex-wrap: wrap; 
+            gap: 15px; 
+            align-items: flex-end; 
+            justify-content: center;
+        }
+
+        .form-group { 
+            display: flex; 
+            flex-direction: column; 
+            flex: 1; 
+            min-width: 180px; 
+        }
+
+        /* DYNAMIC TREATMENT STYLING */
+        #treatment-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .treatment-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        label { 
+            margin-bottom: 8px; 
+            font-size: 0.65rem; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            color: var(--primary); 
+            font-weight: 600;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e8e8e8;
+            border-radius: 0;
+            font-family: inherit;
+            font-size: 0.85rem;
+            background-color: #fafafa;
+        }
+
+        /* BUTTONS */
+        .btn-add {
+            background: none;
+            border: none;
+            color: var(--accent);
+            padding: 5px 0;
+            font-size: 0.65rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: left;
+            width: fit-content;
+        }
+
+        .btn-remove {
+            background: #fdf2f2;
+            border: 1px solid #fee2e2;
+            color: #b91c1c;
+            cursor: pointer;
+            padding: 0 12px;
+            height: 44px;
+            font-weight: bold;
+        }
+
+        .btn-remove:hover { background: #fee2e2; }
+
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.8rem;
+            height: 44px;
+        }
+
+        .btn-submit:hover { background: var(--accent); }
+
+        .full-width-home {
+            width: 100%;
+            flex: none; 
+            margin-top: 15px;
+            display: none;
+        }
+
+        #home-service-note {
+            width: 100%;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--accent);
+            margin-top: 15px;
+            display: none;
+            font-style: italic;
+        }
+
+        @media (max-width: 950px) {
+            form { flex-direction: column; align-items: stretch; }
+            .form-group { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <a href="index.html" class="logo">Ataraxy Wellness Spa</a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="treatment.html">Treatments</a></li>
+            <li><a href="booking.html">Booking</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <main class="booking-section">
+        <div class="booking-container">
+            <h1>Reserve Today</h1>
+
+            <form id="booking-form" action="#">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Location</label>
+                    <select id="service-type" onchange="toggleHomeService()" required>
+                        <option value="spa">In-Spa</option>
+                        <option value="home">Home Service</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="flex: 2;">
+                    <label>Ritual(s)</label>
+                    <div id="treatment-list">
+                        <div class="treatment-row">
+                            <select name="treatments[]" required>
+                                <option value="" disabled selected>Select a treatment</option>
+                                <option>Signature Ataraxy Massage</option>
+                                <option>Luminous Zen Facial</option>
+                                <option>Basalt Ritual (Hot Stone)</option>
+                                <option>Sea Salt Polish (Scrub)</option>
+                                <option>Aromatherapy Soak</option>
+                                <option>Reiki Stillness</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-add" onclick="addTreatment()">+ Add Another Ritual</button>
+                </div>
+
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Time</label>
+                    <input type="time" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Book Now</button>
+
+                <div class="full-width-home" id="address-field">
+                    <label>Delivery Address</label>
+                    <input type="text" placeholder="Street, Barangay, City, Landmarks">
+                </div>
+
+                <div id="home-service-note">
+                    * A transportation fee may apply for Home Service.
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('nav-links');
+            nav.classList.toggle('active');
+        }
+
+        function toggleHomeService() {
+            const isHome = document.getElementById('service-type').value === 'home';
+            document.getElementById('address-field').style.display = isHome ? 'block' : 'none';
+            document.getElementById('home-service-note').style.display = isHome ? 'block' : 'none';
+        }
+
+        function addTreatment() {
+            const list = document.getElementById('treatment-list');
+            const row = document.createElement('div');
+            row.className = 'treatment-row';
+
+            const firstSelect = list.querySelector('select');
+            const newSelect = firstSelect.cloneNode(true);
+            newSelect.selectedIndex = 0;
+
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.className = 'btn-remove';
+            removeBtn.innerHTML = '&times;';
+            removeBtn.onclick = function() { row.remove(); };
+
+            row.appendChild(newSelect);
+            row.appendChild(removeBtn);
+            list.appendChild(row);
+        }
+    </script>
+</body>
+</html>

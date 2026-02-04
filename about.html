@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story | Ataraxy Wellness Spa</title>
+    <style>
+        :root {
+            --primary: #5e6d62; 
+            --accent: #b8977e;  
+            --light: #f9f7f2;   
+            --dark: #2c3332;    
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Optima', 'Segoe UI', Tahoma, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.8;
+        }
+
+        /* UNIFIED NAVIGATION */
+        nav {
+            background: var(--dark);
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed; 
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            height: 80px; 
+        }
+
+        .logo { 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            color: white; 
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+            align-items: center;
+        }
+
+        /* DESKTOP CLICKABLE ROWS */
+        .nav-links a { 
+            display: block;
+            padding: 28px 20px; 
+            text-decoration: none; 
+            color: white; 
+            font-size: 0.8rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); background: rgba(255,255,255,0.03); }
+
+        /* HAMBURGER WITH 2PX GAP */
+        .hamburger { 
+            display: none; 
+            cursor: pointer; 
+            flex-direction: column; 
+            gap: 2px; 
+            padding: 10px;
+        }
+
+        .hamburger span { 
+            width: 25px; 
+            height: 2px; 
+            background: white; 
+            transition: 0.3s; 
+        }
+
+        @media (max-width: 950px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                display: none; 
+                flex-direction: column;
+                position: absolute;
+                top: 80px; 
+                left: 0;
+                width: 100%;
+                background: var(--dark);
+                padding: 0; 
+                text-align: center;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+            }
+
+            .nav-links.active { display: flex; }
+
+            /* MOBILE FULL-ROW CLICKABLE */
+            .nav-links li { width: 100%; }
+            .nav-links a { 
+                padding: 25px 0; 
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+            }
+            .nav-links li:last-child a { border-bottom: none; }
+        }
+
+        /* CONTENT SECTION */
+        .about-section {
+            padding: 160px 5% 80px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-section h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            color: var(--primary);
+        }
+
+        .about-content p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .highlight-quote {
+            color: var(--accent);
+            font-style: italic;
+            font-size: 1.4rem;
+            margin: 50px 0;
+            position: relative;
+            padding: 20px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        footer {
+            background: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #eee;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <a href="index.html" class="logo">Ataraxy Wellness Spa</a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="treatment.html">Treatments</a></li>
+            <li><a href="booking.html">Booking</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <main class="about-section">
+        <h1>Our Story</h1>
+        <div class="about-content">
+            <p>Founded on the principle of <em>Ataraxy</em>—a state of serene calmness and freedom from emotional disturbance—our spa was created as a sanctuary from the relentless pace of modern life.</p>
+            
+            <div class="highlight-quote">
+                "We believe that true wellness begins the moment you decide to pause."
+            </div>
+            
+            <p>At Ataraxy Wellness Spa, we don't just offer treatments; we offer rituals. Our team is dedicated to restoring your natural balance through a blend of traditional Filipino healing techniques and modern therapeutic practices.</p>
+            
+            <p>Whether you visit us at our serene Metro Manila location or invite us into your home through our mobile service, our goal remains the same: to help you find your center and leave feeling renewed.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>Ataraxy Wellness Spa &copy; 2026</p>
+        <p>123 Serenity Drive, Metro Manila, Philippines</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('nav-links');
+            nav.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

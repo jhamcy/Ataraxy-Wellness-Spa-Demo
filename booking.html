@@ -21,7 +21,7 @@
             min-height: 100vh;
         }
 
-        /* UNIFIED NAVIGATION */
+        /* NAVIGATION */
         nav {
             background: var(--dark);
             padding: 0 5%;
@@ -43,7 +43,6 @@
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 2px;
-            white-space: nowrap;
         }
 
         .nav-links { display: flex; list-style: none; align-items: center; }
@@ -69,7 +68,7 @@
             padding: 10px;
         }
 
-        .hamburger span { width: 25px; height: 2px; background: white; transition: 0.3s; }
+        .hamburger span { width: 25px; height: 2px; background: white; }
 
         @media (max-width: 950px) {
             .hamburger { display: flex; }
@@ -90,103 +89,45 @@
             .nav-links a { padding: 25px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
         }
 
-        /* BOOKING FORM */
-        .booking-section {
-            padding: 160px 20px 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .booking-container {
-            width: 100%;
-            max-width: 1200px;
-            background: white;
-            padding: 40px;
-            border-radius: 2px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-        }
-
+        /* FORM STYLES */
+        .booking-section { padding: 160px 20px 60px; display: flex; flex-direction: column; align-items: center; }
+        .booking-container { width: 100%; max-width: 1200px; background: white; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
         h1 { text-align: center; color: var(--primary); text-transform: uppercase; letter-spacing: 6px; font-weight: 300; margin-bottom: 40px; }
 
-        form { 
-            display: flex;
-            flex-wrap: wrap; 
-            gap: 15px; 
-            align-items: flex-end; 
-            justify-content: center;
-        }
-
+        form { display: flex; flex-wrap: wrap; gap: 15px; align-items: flex-end; justify-content: center; }
         .form-group { display: flex; flex-direction: column; flex: 1; min-width: 180px; }
 
-        label { 
-            margin-bottom: 8px; font-size: 0.65rem; text-transform: uppercase; 
-            letter-spacing: 2px; color: var(--primary); font-weight: 600;
-        }
+        label { margin-bottom: 8px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--primary); font-weight: 600; }
         
-        input, select, textarea {
-            width: 100%; padding: 12px; border: 1px solid #e8e8e8;
-            border-radius: 0; font-family: inherit; font-size: 0.85rem; background-color: #fafafa;
-        }
-
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #e8e8e8; font-family: inherit; font-size: 0.85rem; background-color: #fafafa; }
         textarea { resize: none; height: 44px; transition: 0.3s; }
-        textarea:focus { height: 100px; border-color: var(--accent); }
+        textarea:focus { height: 100px; border-color: var(--accent); outline: none; }
 
         .treatment-row { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
 
-        .btn-add {
-            background: none; border: none; color: var(--accent);
-            padding: 5px 0; font-size: 0.65rem; cursor: pointer;
-            text-transform: uppercase; letter-spacing: 1px; width: fit-content;
-        }
+        .btn-add { background: none; border: none; color: var(--accent); padding: 5px 0; font-size: 0.65rem; cursor: pointer; text-transform: uppercase; }
+        .btn-remove { background: #fdf2f2; border: 1px solid #fee2e2; color: #b91c1c; cursor: pointer; padding: 0 12px; height: 44px; }
+        .btn-submit { background: var(--primary); color: white; padding: 12px 30px; border: none; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; font-size: 0.8rem; height: 44px; }
 
-        .btn-remove {
-            background: #fdf2f2; border: 1px solid #fee2e2; color: #b91c1c;
-            cursor: pointer; padding: 0 12px; height: 44px; font-weight: bold;
-        }
-
-        .btn-submit {
-            background: var(--primary); color: white; padding: 12px 30px;
-            border: none; text-transform: uppercase; letter-spacing: 2px;
-            cursor: pointer; transition: 0.3s; font-size: 0.8rem; height: 44px;
-        }
-
-        /* DYNAMIC FIELDS */
-        .home-service-fields {
-            width: 100%; display: none; flex-wrap: wrap; gap: 15px;
-            margin-top: 20px; padding-top: 20px; border-top: 1px dashed #eee;
-        }
+        .home-service-fields { width: 100%; display: none; flex-wrap: wrap; gap: 15px; margin-top: 20px; padding-top: 20px; border-top: 1px dashed #eee; }
         .home-service-fields .form-group { flex: 1; min-width: 250px; }
 
-        /* MODAL STYLES */
-        .modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center;
-            align-items: center; backdrop-filter: blur(3px);
-        }
+        /* MODAL & OVERLAY */
+        .modal-overlay, .success-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2000; justify-content: center; align-items: center; }
+        .modal-overlay { background: rgba(0,0,0,0.6); backdrop-filter: blur(3px); }
+        .success-overlay { background: rgba(255, 255, 255, 0.95); z-index: 3000; text-align: center; }
         .modal-content { background: white; padding: 40px; max-width: 500px; width: 90%; position: relative; }
-        .modal-content h2 { color: var(--primary); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .modal-body p { font-size: 0.9rem; color: #555; margin-bottom: 15px; line-height: 1.5; }
+        .modal-content h2 { color: var(--primary); text-transform: uppercase; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #999; }
-
-        /* SUCCESS OVERLAY */
-        .success-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.95); z-index: 3000; justify-content: center;
-            align-items: center; text-align: center;
-        }
-        .spinner { width: 50px; height: 50px; border: 3px solid var(--light); border-top: 3px solid var(--accent); border-radius: 50%; margin: 0 auto; animation: spin 1s linear infinite; }
+        .spinner { width: 50px; height: 50px; border: 3px solid #eee; border-top: 3px solid var(--accent); border-radius: 50%; margin: 0 auto; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        @media (max-width: 950px) {
-            form { flex-direction: column; align-items: stretch; }
-            .form-group { width: 100%; }
-        }
+        @media (max-width: 950px) { form { flex-direction: column; align-items: stretch; } .form-group { width: 100%; } }
     </style>
 </head>
 <body>
 
-    <nav id="navbar">
+    <nav>
         <a href="index.html" class="logo">Ataraxy Wellness Spa</a>
         <ul class="nav-links" id="nav-links">
             <li><a href="index.html">Home</a></li>
@@ -251,8 +192,8 @@
 
                 <div style="flex: 100%; margin: 15px 0; display: flex; align-items: center; gap: 10px;">
                     <input type="checkbox" id="terms" onchange="toggleButton()" style="width: 18px; height: 18px; cursor: pointer;">
-                    <label for="terms" style="margin: 0; font-size: 0.75rem; color: #666; cursor: pointer; text-transform: none; letter-spacing: 0.5px;">
-                        I agree to the <span onclick="openModal()" style="text-decoration: underline; color: var(--accent); cursor: pointer;">Terms & Conditions</span>.
+                    <label for="terms" style="font-size: 0.75rem; color: #666; cursor: pointer; text-transform: none;">
+                        I agree to the <span onclick="openModal()" style="text-decoration: underline; color: var(--accent);">Terms & Conditions</span>.
                     </label>
                 </div>
 
@@ -260,7 +201,8 @@
 
                 <div class="home-service-fields" id="home-fields">
                     <div class="form-group">
-                        <label>Home Address</label> <input type="text" id="home-address" placeholder="Street, Barangay, City, Landmarks">
+                        <label>Home Address</label>
+                        <input type="text" id="home-address" placeholder="Street, Barangay, City, Landmarks">
                     </div>
                     <div class="form-group">
                         <label>Contact Number</label>
@@ -274,8 +216,8 @@
     <div id="successOverlay" class="success-overlay">
         <div class="success-box">
             <div class="spinner"></div>
-            <h2>Preparing Your Ritual</h2>
-            <p>Connecting you to our concierge via WhatsApp...</p>
+            <h2 style="color: var(--primary); margin-top: 20px;">Preparing Your Ritual</h2>
+            <p style="color: var(--accent); font-style: italic;">Connecting to WhatsApp...</p>
         </div>
     </div>
 
@@ -283,23 +225,18 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <h2>Spa Policy</h2>
-            <div class="modal-body">
-                <p><strong>Cancellation:</strong> Please notify us at least 4 hours in advance.</p>
-                <p><strong>Home Service:</strong> A transportation fee applies based on distance to your Home Address.</p>
-                <p><strong>Health:</strong> Please inform us of any medical conditions prior to treatment.</p>
-            </div>
-            <button type="button" class="btn-submit" onclick="closeModal()" style="width: 100%;">I Understand</button>
+            <p><strong>Cancellation:</strong> 4-hour notice required.</p>
+            <p><strong>Home Service:</strong> Transport fee based on distance.</p>
+            <button type="button" class="btn-submit" onclick="closeModal()" style="width: 100%; margin-top: 20px;">I Understand</button>
         </div>
     </div>
 
     <script>
         function toggleMenu() { document.getElementById('nav-links').classList.toggle('active'); }
-
         function toggleHomeService() {
             const isHome = document.getElementById('service-type').value === 'home';
             document.getElementById('home-fields').style.display = isHome ? 'flex' : 'none';
         }
-
         function toggleButton() {
             const btn = document.getElementById('submit-btn');
             const isChecked = document.getElementById('terms').checked;
@@ -307,7 +244,6 @@
             btn.style.opacity = isChecked ? "1" : "0.5";
             btn.style.cursor = isChecked ? "pointer" : "not-allowed";
         }
-
         function openModal() { document.getElementById('termsModal').style.display = 'flex'; }
         function closeModal() { document.getElementById('termsModal').style.display = 'none'; }
 
@@ -317,32 +253,35 @@
             row.className = 'treatment-row';
             const newSelect = list.querySelector('select').cloneNode(true);
             newSelect.selectedIndex = 0;
-            const removeBtn = document.createElement('button');
-            removeBtn.type = 'button'; removeBtn.className = 'btn-remove'; removeBtn.innerHTML = '&times;';
-            removeBtn.onclick = () => row.remove();
-            row.appendChild(newSelect); row.appendChild(removeBtn); list.appendChild(row);
+            const rm = document.createElement('button');
+            rm.type = 'button'; rm.className = 'btn-remove'; rm.innerHTML = '&times;';
+            rm.onclick = () => row.remove();
+            row.appendChild(newSelect); row.appendChild(rm); list.appendChild(row);
         }
 
         function sendBooking() {
             const name = document.getElementById('client-name').value;
             const date = document.getElementById('book-date').value;
             const time = document.getElementById('book-time').value;
+            const type = document.getElementById('service-type').value;
             const rituals = Array.from(document.querySelectorAll('select[name="treatments[]"]')).map(s => s.value).filter(v => v);
-            
-            if(!name || !date || !time || rituals.length === 0) { alert("Please complete the form."); return; }
+
+            if(!name || !date || !time || rituals.length === 0) { alert("Complete all fields."); return; }
 
             document.getElementById('successOverlay').style.display = 'flex';
 
-            let msg = `*NEW BOOKING*%0A*Name:* ${name}%0A*Rituals:* ${rituals.join(", ")}%0A*Date:* ${date}%0A*Time:* ${time}%0A*Loc:* ${document.getElementById('service-type').value.toUpperCase()}`;
-            
-            if(document.getElementById('service-type').value === 'home') {
-                // WHATSAPP HEADER UPDATED TO HOME ADDRESS
+            let msg = `*NEW BOOKING*%0A*Name:* ${name}%0A*Rituals:* ${rituals.join(", ")}%0A*Date:* ${date}%0A*Time:* ${time}%0A*Loc:* ${type.toUpperCase()}`;
+            if(type === 'home') {
                 msg += `%0A*Home Address:* ${document.getElementById('home-address').value}%0A*Contact:* ${document.getElementById('home-contact').value}`;
             }
-            if(document.getElementById('book-notes').value) msg += `%0A*Notes:* ${document.getElementById('book-notes').value}`;
+            const notes = document.getElementById('book-notes').value;
+            if(notes) msg += `%0A*Notes:* ${notes}`;
+
+            const waLink = `https://wa.me/639310410733?text=${msg}`;
 
             setTimeout(() => {
-                window.location.href = `https://wa.me/639310410733?text=${msg}`;
+                window.location.assign(waLink);
+                setTimeout(() => { document.getElementById('successOverlay').style.display = 'none'; }, 2000);
             }, 2000);
         }
     </script>

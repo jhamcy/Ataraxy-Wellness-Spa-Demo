@@ -68,11 +68,11 @@
         .treatment-row { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
         .btn-add { background: none; border: none; color: var(--accent); font-size: 0.65rem; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
         .btn-remove { background: #fdf2f2; border: 1px solid #fee2e2; color: #b91c1c; cursor: pointer; padding: 0 12px; height: 44px; }
-        .btn-submit { background: var(--primary); color: white; padding: 12px 30px; border: none; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; height: 44px; transition: 0.3s; width: 100%; margin-top: 10px; }
+        .btn-submit { background: var(--primary); color: white; padding: 12px 30px; border: none; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; height: 44px; transition: 0.3s; }
 
         .home-service-fields { width: 100%; display: none; flex-wrap: wrap; gap: 15px; margin-top: 20px; padding-top: 20px; border-top: 1px dashed #eee; }
 
-        /* TERMS ALIGNMENT */
+        /* TERMS ALIGNMENT FIX */
         .terms-container { flex: 100%; margin: 20px 0; display: flex; align-items: flex-start; gap: 12px; }
         .terms-label { margin: 0; font-size: 0.75rem; color: #666; cursor: pointer; text-transform: none; letter-spacing: 0.5px; line-height: 1.4; }
 
@@ -144,20 +144,24 @@
                 </div>
                 <div class="form-group" style="flex: 100%;">
                     <label>Special Instructions</label>
-                    <textarea id="book-notes" placeholder="Notes..."></textarea>
+                    <textarea id="book-notes" placeholder="Allergies, pressure preference, or notes..."></textarea>
                 </div>
 
                 <div class="terms-container">
                     <input type="checkbox" id="terms" onchange="toggleButton()" style="width: 18px; height: 18px; cursor: pointer; margin-top: 2px;">
                     <label for="terms" class="terms-label">
-                        I agree to the <span onclick="openModal()" style="text-decoration: underline; color: var(--accent); cursor: pointer; font-weight: 600;">Terms & Conditions</span>.
+                        I agree to the 
+                        <span onclick="openModal()" style="text-decoration: underline; color: var(--accent); cursor: pointer; font-weight: 600;">
+                            Terms & Conditions
+                        </span> 
+                        and the cancellation policy.
                     </label>
                 </div>
 
                 <button type="button" id="submit-btn" class="btn-submit" onclick="sendBooking()" disabled style="opacity: 0.5; cursor: not-allowed;">Book Now</button>
 
                 <div class="home-service-fields" id="home-fields">
-                    <div class="form-group"><label>Home Address</label><input type="text" id="home-address" placeholder="Address"></div>
+                    <div class="form-group"><label>Home Address</label><input type="text" id="home-address" placeholder="Street, Barangay, City, Landmarks"></div>
                     <div class="form-group"><label>Contact Number</label><input type="tel" id="home-contact" placeholder="09XX-XXX-XXXX"></div>
                 </div>
             </form>
@@ -167,27 +171,30 @@
     <div id="successOverlay" class="success-overlay">
         <div class="success-box">
             <div class="spinner"></div>
-            <h2 style="color: var(--primary); margin-top: 20px;">Redirecting to WhatsApp...</h2>
-            <a id="manual-wa-link">Click here if not redirected automatically.</a>
+            <h2 style="color: var(--primary); margin-top: 20px; letter-spacing: 3px;">Preparing Your Ritual</h2>
+            <p style="color: var(--accent); font-style: italic;">Opening WhatsApp...</p>
+            <a id="manual-wa-link">WhatsApp didn't open? Click here.</a>
         </div>
     </div>
 
     <div id="termsModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2>Spa Policy</h2>
-            <p><strong>Cancellation:</strong> 4-hour notice required.</p>
-            <p><strong>Home Service:</strong> Transport fee based on distance.</p>
-            <button type="button" class="btn-submit" onclick="closeModal()" style="width: 100%; margin-top: 15px;">I Understand</button>
+            <h2 style="letter-spacing: 2px;">Spa Policy</h2>
+            <p style="font-size: 0.9rem; line-height: 1.6; color: #555;"><strong>Cancellation:</strong> Please notify us at least 4 hours in advance.</p>
+            <p style="font-size: 0.9rem; line-height: 1.6; color: #555;"><strong>Home Service:</strong> A transportation fee applies based on your distance.</p>
+            <button type="button" class="btn-submit" onclick="closeModal()" style="width: 100%; margin-top: 20px;">I Understand</button>
         </div>
     </div>
 
     <script>
         function toggleMenu() { document.getElementById('nav-links').classList.toggle('active'); }
+        
         function toggleHomeService() {
             const isHome = document.getElementById('service-type').value === 'home';
             document.getElementById('home-fields').style.display = isHome ? 'flex' : 'none';
         }
+
         function toggleButton() {
             const btn = document.getElementById('submit-btn');
             const isChecked = document.getElementById('terms').checked;
@@ -195,6 +202,7 @@
             btn.style.opacity = isChecked ? "1" : "0.5";
             btn.style.cursor = isChecked ? "pointer" : "not-allowed";
         }
+
         function openModal() { document.getElementById('termsModal').style.display = 'flex'; }
         function closeModal() { document.getElementById('termsModal').style.display = 'none'; }
 
@@ -217,7 +225,9 @@
             const type = document.getElementById('service-type').value;
             const rituals = Array.from(document.querySelectorAll('select[name="treatments[]"]')).map(s => s.value).filter(v => v);
 
-            if(!name || !date || !time || rituals.length === 0) { alert("Please complete the form."); return; }
+            if(!name || !date || !time || rituals.length === 0) { alert("Please complete all fields."); return; }
+
+            document.getElementById('successOverlay').style.display = 'flex';
 
             let msg = `*NEW BOOKING*%0A*Name:* ${name}%0A*Rituals:* ${rituals.join(", ")}%0A*Date:* ${date}%0A*Time:* ${time}%0A*Loc:* ${type.toUpperCase()}`;
             if(type === 'home') msg += `%0A*Home Address:* ${document.getElementById('home-address').value}%0A*Contact:* ${document.getElementById('home-contact').value}`;
@@ -225,14 +235,14 @@
 
             const waLink = `https://wa.me/639310410733?text=${msg}`;
             
-            // Show overlay as backup
-            document.getElementById('successOverlay').style.display = 'flex';
-            const manual = document.getElementById('manual-wa-link');
-            manual.href = waLink;
-            manual.style.display = "inline-block";
+            const manualLink = document.getElementById('manual-wa-link');
+            manualLink.href = waLink;
+            manualLink.target = "_blank";
 
-            // Instant redirect for Mobile compatibility
-            window.location.href = waLink;
+            setTimeout(() => {
+                manualLink.style.display = "inline-block";
+                window.open(waLink, '_blank');
+            }, 2000);
         }
     </script>
 </body>

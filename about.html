@@ -9,7 +9,8 @@
             --primary: #5e6d62; 
             --accent: #b8977e;  
             --light: #f9f7f2;   
-            --dark: #2c3332;    
+            --dark: #2c3332;
+            --white: #ffffff;    
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -19,11 +20,13 @@
             background-color: var(--light);
             color: var(--dark);
             line-height: 1.8;
+            overflow-x: hidden;
         }
 
-        /* UNIFIED NAVIGATION */
+        /* NAVIGATION WITH GLASS EFFECT (SAME AS INDEX) */
         nav {
-            background: var(--dark);
+            background: rgba(44, 51, 50, 0.95);
+            backdrop-filter: blur(10px);
             padding: 0 5%;
             display: flex;
             justify-content: space-between;
@@ -32,18 +35,20 @@
             width: 100%;
             top: 0;
             left: 0;
-            z-index: 1000;
-            height: 80px; 
+            z-index: 2000;
+            height: 90px;
+            transition: 0.4s;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .logo { 
-            font-size: 1.2rem; 
-            font-weight: bold; 
+            font-size: 1.4rem; 
+            font-weight: 300; 
             color: white; 
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            white-space: nowrap;
+            letter-spacing: 4px;
+            z-index: 2101;
         }
 
         .nav-links { 
@@ -52,109 +57,174 @@
             align-items: center;
         }
 
-        /* DESKTOP CLICKABLE ROWS */
         .nav-links a { 
             display: block;
-            padding: 28px 20px; 
+            padding: 30px 20px;
             text-decoration: none; 
-            color: white; 
-            font-size: 0.8rem; 
+            color: rgba(255,255,255,0.8); 
+            font-size: 0.75rem; 
             text-transform: uppercase; 
-            letter-spacing: 1px; 
+            letter-spacing: 2px; 
             transition: 0.3s;
         }
 
-        .nav-links a:hover { color: var(--accent); background: rgba(255,255,255,0.03); }
+        .nav-links a:hover { color: var(--accent); }
 
-        /* HAMBURGER WITH 2PX GAP */
+        /* LUXURY HAMBURGER */
         .hamburger { 
             display: none; 
             cursor: pointer; 
             flex-direction: column; 
-            gap: 2px; 
+            gap: 6px; 
+            z-index: 2101;
             padding: 10px;
         }
 
         .hamburger span { 
-            width: 25px; 
-            height: 2px; 
+            width: 28px; 
+            height: 1px; 
             background: white; 
-            transition: 0.3s; 
+            transition: 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6); 
         }
 
-        @media (max-width: 950px) {
-            .hamburger { display: flex; }
-            .nav-links {
-                display: none; 
-                flex-direction: column;
-                position: absolute;
-                top: 80px; 
-                left: 0;
-                width: 100%;
-                background: var(--dark);
-                padding: 0; 
-                text-align: center;
-                box-shadow: 0 10px 15px rgba(0,0,0,0.2);
-            }
-
-            .nav-links.active { display: flex; }
-
-            /* MOBILE FULL-ROW CLICKABLE */
-            .nav-links li { width: 100%; }
-            .nav-links a { 
-                padding: 25px 0; 
-                border-bottom: 1px solid rgba(255,255,255,0.05);
-            }
-            .nav-links li:last-child a { border-bottom: none; }
-        }
+        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
+        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
         /* CONTENT SECTION */
         .about-section {
-            padding: 160px 5% 80px;
-            max-width: 800px;
+            padding: 180px 10% 100px;
+            max-width: 1000px;
             margin: 0 auto;
             text-align: center;
         }
 
         .about-section h1 {
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 5vw, 3rem);
             font-weight: 300;
-            letter-spacing: 8px;
+            letter-spacing: 12px;
             text-transform: uppercase;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             color: var(--primary);
+            animation: fadeIn 1.5s ease;
+        }
+
+        .about-content {
+            max-width: 750px;
+            margin: 0 auto;
         }
 
         .about-content p {
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-            color: #555;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+            color: #444;
+            text-align: justify;
+            text-align-last: center;
         }
 
         .highlight-quote {
             color: var(--accent);
             font-style: italic;
-            font-size: 1.4rem;
-            margin: 50px 0;
+            font-size: 1.5rem;
+            margin: 60px 0;
             position: relative;
-            padding: 20px 0;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
+            padding: 30px 0;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-weight: 300;
         }
 
+        /* VALUES GRID */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .value-card {
+            padding: 30px;
+            border: 1px solid rgba(0,0,0,0.03);
+            background: var(--white);
+            transition: 0.3s;
+        }
+
+        .value-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .value-card h3 {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .value-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
+        }
+
+        /* --- UPDATED FOOTER (MATCHES INDEX.HTML) --- */
         footer {
-            background: white;
-            padding: 40px 20px;
+            background: var(--dark);
+            color: white;
+            padding: 80px 5%;
             text-align: center;
-            border-top: 1px solid #eee;
-            margin-top: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .footer-info {
+            opacity: 0.6;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* MOBILE OVERLAY */
+        @media (max-width: 950px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                display: flex; 
+                flex-direction: column;
+                justify-content: center;
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(44, 51, 50, 0.98);
+                transform: translateX(100%);
+                transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+                padding: 0;
+                z-index: 2100;
+            }
+
+            .nav-links.active { transform: translateX(0); }
+            .nav-links li { width: 100%; opacity: 0; transform: translateY(20px); transition: 0.4s; }
+            .nav-links.active li { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+            .nav-links a { padding: 20px 0; font-size: 1.5rem; letter-spacing: 6px; text-align: center; }
         }
     </style>
 </head>
 <body>
 
     <nav id="navbar">
-        <a href="index.html" class="logo">Ataraxy Wellness Spa</a>
+        <a href="index.html" class="logo">Ataraxy</a>
         <ul class="nav-links" id="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
@@ -178,21 +248,69 @@
             </div>
             
             <p>At Ataraxy Wellness Spa, we don't just offer treatments; we offer rituals. Our team is dedicated to restoring your natural balance through a blend of traditional Filipino healing techniques and modern therapeutic practices.</p>
-            
-            <p>Whether you visit us at our serene Metro Manila location or invite us into your home through our mobile service, our goal remains the same: to help you find your center and leave feeling renewed.</p>
+        </div>
+
+        <div class="values-grid">
+            <div class="value-card">
+                <h3>The Ritual</h3>
+                <p>Every treatment is designed as a journey, from the first scent to the final touch.</p>
+            </div>
+            <div class="value-card">
+                <h3>Heritage</h3>
+                <p>Respecting traditional Filipino healing while embracing modern science.</p>
+            </div>
+            <div class="value-card">
+                <h3>Purity</h3>
+                <p>Using only organic, botanical elements that are kind to both skin and soul.</p>
+            </div>
         </div>
     </main>
 
     <footer>
-        <p>Ataraxy Wellness Spa &copy; 2026</p>
-        <p>123 Serenity Drive, Metro Manila, Philippines</p>
+        <span class="footer-logo">Ataraxy</span>
+        <div class="footer-info">
+            <p>123 Serenity Drive, Makati City, Metro Manila</p>
+            <p>Open Daily: 10:00 AM – 11:00 PM</p>
+            <p style="margin-top: 20px;">&copy; 2026 JMCY Web Solutions. All Rights Reserved.</p>
+        </div>
     </footer>
 
     <script>
         function toggleMenu() {
             const nav = document.getElementById('nav-links');
+            const burger = document.querySelector('.hamburger');
             nav.classList.toggle('active');
+            burger.classList.toggle('active');
+
+            if (nav.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'initial';
+            }
         }
+
+        // Close menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const nav = document.getElementById('nav-links');
+                const burger = document.querySelector('.hamburger');
+                nav.classList.remove('active');
+                burger.classList.remove('active');
+                document.body.style.overflow = 'initial';
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.height = '70px';
+                nav.style.background = 'rgba(44, 51, 50, 1)';
+            } else {
+                nav.style.height = '90px';
+                nav.style.background = 'rgba(44, 51, 50, 0.95)';
+            }
+        });
     </script>
 </body>
 </html>

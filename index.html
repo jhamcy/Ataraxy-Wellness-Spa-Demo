@@ -9,7 +9,8 @@
             --primary: #5e6d62; 
             --accent: #b8977e;  
             --light: #f9f7f2;   
-            --dark: #2c3332;    
+            --dark: #2c3332;
+            --white: #ffffff;    
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -18,12 +19,14 @@
             font-family: 'Optima', 'Segoe UI', Tahoma, sans-serif;
             background-color: var(--light);
             color: var(--dark);
-            line-height: 1.6;
+            line-height: 1.8;
+            overflow-x: hidden;
         }
 
-        /* UNIFIED NAVIGATION */
+        /* NAVIGATION WITH GLASS EFFECT */
         nav {
-            background: var(--dark);
+            background: rgba(44, 51, 50, 0.95);
+            backdrop-filter: blur(10px);
             padding: 0 5%;
             display: flex;
             justify-content: space-between;
@@ -32,18 +35,20 @@
             width: 100%;
             top: 0;
             left: 0;
-            z-index: 1000;
-            height: 80px; 
+            z-index: 2000;
+            height: 90px;
+            transition: 0.4s;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .logo { 
-            font-size: 1.2rem; 
-            font-weight: bold; 
+            font-size: 1.4rem; 
+            font-weight: 300; 
             color: white; 
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            white-space: nowrap;
+            letter-spacing: 4px;
+            z-index: 2101;
         }
 
         .nav-links { 
@@ -52,67 +57,45 @@
             align-items: center;
         }
 
-        /* DESKTOP CLICKABLE ROWS */
         .nav-links a { 
             display: block;
-            padding: 28px 20px; /* Aligns clickable area with nav height */
+            padding: 30px 20px;
             text-decoration: none; 
-            color: white; 
-            font-size: 0.8rem; 
+            color: rgba(255,255,255,0.8); 
+            font-size: 0.75rem; 
             text-transform: uppercase; 
-            letter-spacing: 1px; 
+            letter-spacing: 2px; 
             transition: 0.3s;
         }
 
-        .nav-links a:hover { color: var(--accent); background: rgba(255,255,255,0.03); }
+        .nav-links a:hover { color: var(--accent); }
 
-        /* HAMBURGER WITH 2PX GAP */
+        /* LUXURY HAMBURGER */
         .hamburger { 
             display: none; 
             cursor: pointer; 
             flex-direction: column; 
-            gap: 2px; 
+            gap: 6px; 
+            z-index: 2101;
             padding: 10px;
         }
 
         .hamburger span { 
-            width: 25px; 
-            height: 2px; 
+            width: 28px; 
+            height: 1px; 
             background: white; 
-            transition: 0.3s; 
+            transition: 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6); 
         }
 
-        @media (max-width: 950px) {
-            .hamburger { display: flex; }
-            .nav-links {
-                display: none; 
-                flex-direction: column;
-                position: absolute;
-                top: 80px; 
-                left: 0;
-                width: 100%;
-                background: var(--dark);
-                padding: 0; 
-                text-align: center;
-                box-shadow: 0 10px 15px rgba(0,0,0,0.2);
-            }
-
-            .nav-links.active { display: flex; }
-
-            /* MOBILE FULL-ROW CLICKABLE */
-            .nav-links li { width: 100%; }
-            .nav-links a { 
-                padding: 25px 0; 
-                border-bottom: 1px solid rgba(255,255,255,0.05);
-            }
-            .nav-links li:last-child a { border-bottom: none; }
-        }
+        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
+        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
         /* HERO SECTION */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                        url('spa-hero.jpg') center/cover no-repeat;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=2070') center/cover no-repeat;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -123,69 +106,261 @@
         }
 
         .hero h1 { 
-            font-size: 3.5rem; 
+            font-size: clamp(3rem, 8vw, 5rem); 
             font-weight: 300; 
             text-transform: uppercase; 
-            letter-spacing: 12px; 
-            margin-bottom: 20px;
+            letter-spacing: 20px; 
+            margin-bottom: 10px;
+            animation: fadeIn 2s ease;
         }
 
         .hero p { 
-            font-size: 1.2rem; 
-            letter-spacing: 3px; 
+            font-size: 1.1rem; 
+            letter-spacing: 5px; 
             margin-bottom: 40px; 
             font-style: italic;
+            opacity: 0.9;
         }
 
         .cta-button {
-            padding: 18px 45px;
-            background-color: var(--accent);
+            padding: 20px 50px;
+            border: 1px solid white;
             color: white;
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 0.9rem;
-            transition: 0.4s;
-            border-radius: 2px;
+            letter-spacing: 4px;
+            font-size: 0.8rem;
+            transition: 0.5s;
+            background: rgba(255,255,255,0.05);
         }
 
         .cta-button:hover {
-            background-color: white;
+            background-color: var(--white);
             color: var(--dark);
         }
 
-        /* INTRO SECTION */
-        .intro {
-            padding: 100px 5%;
-            text-align: center;
-            max-width: 900px;
-            margin: auto;
-        }
+        /* INTRO & SERVICES SECTION */
+        section { padding: 120px 10%; }
 
+        .intro { text-align: center; max-width: 800px; margin: auto; }
         .intro h2 {
             color: var(--primary);
             text-transform: uppercase;
-            letter-spacing: 5px;
+            letter-spacing: 8px;
             margin-bottom: 30px;
             font-weight: 300;
+            font-size: 2rem;
         }
 
-        footer {
-            background: white;
-            padding: 40px 20px;
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 40px;
             text-align: center;
-            border-top: 1px solid #eee;
+            transition: 0.4s;
+            border: 1px solid #f0efeb;
         }
 
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; letter-spacing: 6px; }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        .service-card h3 {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        /* --- UPDATED: INFINITE SLIDER TESTIMONIALS --- */
+        .testimonials-slider {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 80px 0; /* Reduced vertical padding */
+            text-align: center;
+            overflow: hidden; /* Essential for slider */
+            position: relative;
+        }
+
+        .testimonials-slider h2 {
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            font-weight: 300;
+            margin-bottom: 50px;
+            font-size: 1.5rem; /* Smaller title */
+        }
+
+        /* The moving track */
+        .slider-track {
+            display: flex;
+            width: calc(350px * 8); /* (Card width + gap) * number of cards (including clones) */
+            animation: scrollRightToLeft 30s linear infinite; /* Smooth, continuous right to left */
+        }
+
+        /* Pause on hover for accessibility */
+        .slider-track:hover {
+            animation-play-state: paused;
+        }
+
+        /* The individual card */
+        .testimonial-card {
+            width: 320px; /* Smaller width */
+            margin: 0 15px; /* Creates the gap */
+            background: rgba(255,255,255,0.05); /* Subtle card background */
+            padding: 30px; /* Reduced padding */
+            flex-shrink: 0; /* Prevents shrinking in flex container */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: left;
+        }
+
+        .testimonial-card blockquote {
+            font-size: 0.9rem; /* Smaller text */
+            font-style: italic;
+            font-weight: 300;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            opacity: 0.8;
+            position: relative;
+        }
+
+        .testimonial-card blockquote::before {
+            content: '"';
+            font-size: 3rem;
+            position: absolute;
+            top: -15px;
+            left: -10px;
+            opacity: 0.1;
+            font-family: serif;
+        }
+
+        .author {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.7rem; /* Smaller author text */
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .author span {
+            display: block;
+            font-weight: 300;
+            opacity: 0.6;
+            margin-top: 3px;
+            letter-spacing: 1px;
+            text-transform: none;
+        }
+
+        /* KEYFRAMES FOR SMOOTH CONTINUOUS MOVE */
+        @keyframes scrollRightToLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-350px * 4)); } /* Moves left by width of original 4 cards */
+        }
+
+        /* Gradient overlays on sides for luxury blending */
+        .testimonials-slider::before,
+        .testimonials-slider::after {
+            content: "";
+            height: 100%;
+            position: absolute;
+            top: 0;
+            width: 15%;
+            z-index: 2;
+        }
+
+        .testimonials-slider::before {
+            left: 0;
+            background: linear-gradient(to right, var(--primary) 0%, rgba(94, 109, 98, 0) 100%);
+        }
+
+        .testimonials-slider::after {
+            right: 0;
+            background: linear-gradient(to left, var(--primary) 0%, rgba(94, 109, 98, 0) 100%);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .footer-info {
+            opacity: 0.6;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 950px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                display: flex; 
+                flex-direction: column;
+                justify-content: center;
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(44, 51, 50, 0.98);
+                transform: translateX(100%);
+                transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+                padding: 0;
+                z-index: 2100;
+            }
+
+            .nav-links.active { transform: translateX(0); }
+
+            .nav-links li { 
+                width: 100%; 
+                opacity: 0; 
+                transform: translateY(20px);
+                transition: 0.4s;
+            }
+
+            .nav-links.active li { 
+                opacity: 1; 
+                transform: translateY(0);
+                transition-delay: 0.3s;
+            }
+
+            .nav-links a { 
+                padding: 20px 0; 
+                font-size: 1.5rem;
+                letter-spacing: 6px;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
 
     <nav id="navbar">
-        <a href="index.html" class="logo">Ataraxy Wellness Spa</a>
+        <a href="index.html" class="logo">Ataraxy</a>
         <ul class="nav-links" id="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
@@ -201,25 +376,114 @@
 
     <header class="hero">
         <h1>Ataraxy</h1>
-        <p>A state of serene calmness</p>
-        <a href="booking.html" class="cta-button">Reserve Today</a>
+        <p>A STATE OF SERENE CALMNESS</p>
+        <a href="booking.html" class="cta-button">Reserve Your Experience</a>
     </header>
 
     <section class="intro">
         <h2>Your Urban Sanctuary</h2>
-        <p>Escape the noise of the city and immerse yourself in a world of tranquility. At Ataraxy Wellness Spa, we provide a holistic approach to wellness, combining ancient healing rituals with modern luxury.</p>
+        <p>Beyond the glass and steel of Metro Manila lies a sanctuary designed for the soul. At Ataraxy Wellness Spa, we believe that true wellness is the absence of mental disturbance. Our therapists specialize in harmonizing the body's natural rhythm through mindful touch and botanical elements.</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Massage Rituals</h3>
+                <p>From traditional Hilot to deep tissue recovery, designed to release deep-seated tension.</p>
+            </div>
+            <div class="service-card">
+                <h3>Skin Radiance</h3>
+                <p>Advanced botanical facials that restore your natural glow and protect against urban pollutants.</p>
+            </div>
+            <div class="service-card">
+                <h3>Hydrotherapy</h3>
+                <p>Immersion experiences that use the healing power of water to detoxify and revitalize.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-slider">
+        <h2>Guest Experiences</h2>
+        
+        <div class="slider-track">
+            <div class="testimonial-card">
+                <blockquote>"The Hilot massage was transformative, balancing traditional technique with absolute luxury. The city disappears here."</blockquote>
+                <p class="author">Maria S. <span>Verified Guest</span></p>
+            </div>
+            <div class="testimonial-card">
+                <blockquote>"Ataraxy is the perfect name. From the moment you smell the signature scent, the noise vanished. An essential urban escape."</blockquote>
+                <p class="author">David L. <span>Business Executive</span></p>
+            </div>
+            <div class="testimonial-card">
+                <blockquote>"The attention to detail is unmatched. The therapists are intuitive and the botanical facials left my skin glowing."</blockquote>
+                <p class="author">Sophia R. <span>Lifestyle Blogger</span></p>
+            </div>
+            <div class="testimonial-card">
+                <blockquote>"A truly 5-star experience hidden in the heart of Makati. Gentle, professional, and deeply relaxing."</blockquote>
+                <p class="author">James P. <span>Local Resident</span></p>
+            </div>
+
+            <div class="testimonial-card">
+                <blockquote>"The Hilot massage was transformative, balancing traditional technique with absolute luxury. The city disappears here."</blockquote>
+                <p class="author">Maria S. <span>Verified Guest</span></p>
+            </div>
+            <div class="testimonial-card">
+                <blockquote>"Ataraxy is the perfect name. From the moment you smell the signature scent, the noise vanished. An essential urban escape."</blockquote>
+                <p class="author">David L. <span>Business Executive</span></p>
+            </div>
+            <div class="testimonial-card">
+                <blockquote>"The attention to detail is unmatched. The therapists are intuitive and the botanical facials left my skin glowing."</blockquote>
+                <p class="author">Sophia R. <span>Lifestyle Blogger</span></p>
+            </div>
+            <div class="testimonial-card">
+                <blockquote>"A truly 5-star experience hidden in the heart of Makati. Gentle, professional, and deeply relaxing."</blockquote>
+                <p class="author">James P. <span>Local Resident</span></p>
+            </div>
+        </div>
     </section>
 
     <footer>
-        <p>Ataraxy Wellness Spa &copy; 2026</p>
-        <p>123 Serenity Drive, Metro Manila, Philippines</p>
+        <span class="footer-logo">Ataraxy</span>
+        <div class="footer-info">
+            <p>123 Serenity Drive, Makati City, Metro Manila</p>
+            <p>Open Daily: 10:00 AM – 11:00 PM</p>
+            <p style="margin-top: 20px;">&copy; 2026 JMCY Web Solutions. All Rights Reserved.</p>
+        </div>
     </footer>
 
     <script>
         function toggleMenu() {
             const nav = document.getElementById('nav-links');
+            const burger = document.querySelector('.hamburger');
+            
             nav.classList.toggle('active');
+            burger.classList.toggle('active');
+
+            if (nav.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'initial';
+            }
         }
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const nav = document.getElementById('nav-links');
+                const burger = document.querySelector('.hamburger');
+                nav.classList.remove('active');
+                burger.classList.remove('active');
+                document.body.style.overflow = 'initial';
+            });
+        });
+
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.height = '70px';
+                nav.style.background = 'rgba(44, 51, 50, 1)';
+            } else {
+                nav.style.height = '90px';
+                nav.style.background = 'rgba(44, 51, 50, 0.95)';
+            }
+        });
     </script>
 </body>
 </html>
